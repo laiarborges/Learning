@@ -3,116 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Learn with Us</title>
+    <title>Interactive Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
         }
-        header {
+        .quiz-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .answers {
+            list-style: none;
+            padding: 0;
+        }
+        .answers li {
+            margin: 10px 0;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
             background-color: #4CAF50;
             color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav {
-            background-color: #333;
-            overflow: hidden;
-        }
-        nav a {
-            color: white;
-            padding: 14px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-        }
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        section {
-            padding: 20px;
-        }
-        .course-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .course {
-            background-color: white;
-            padding: 15px;
+            border: none;
             border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 30%;
-            box-sizing: border-box;
+            cursor: pointer;
         }
-        .course h3 {
-            color: #4CAF50;
+        .submit-btn:hover {
+            background-color: #45a049;
         }
-        footer {
-            background-color: #333;
-            color: white;
+        #result {
+            margin-top: 20px;
             text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+            font-size: 1.2em;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>Welcome to Learn with Us</h1>
-        <p>Your online platform to enhance your skills</p>
-    </header>
-
-    <!-- Navigation -->
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#courses">Courses</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
-    <!-- Main Content -->
-    <section id="home">
-        <h2>About Us</h2>
-        <p>We offer a wide range of online courses to help you master new skills, whether you're learning a new language, coding, or enhancing your career. Join us to start learning today!</p>
-    </section>
-
-    <section id="courses">
-        <h2>Our Courses</h2>
-        <div class="course-list">
-            <div class="course">
-                <h3>Web Development</h3>
-                <p>Learn HTML, CSS, JavaScript, and more. Build modern websites from scratch!</p>
+    <div class="quiz-container">
+        <h1>General Knowledge Quiz</h1>
+        <div id="quiz">
+            <!-- Question 1 -->
+            <div class="question">
+                <p>1. What is the capital of France?</p>
+                <ul class="answers">
+                    <li><input type="radio" name="q1" value="A"> A) Paris</li>
+                    <li><input type="radio" name="q1" value="B"> B) London</li>
+                    <li><input type="radio" name="q1" value="C"> C) Berlin</li>
+                    <li><input type="radio" name="q1" value="D"> D) Madrid</li>
+                </ul>
             </div>
-            <div class="course">
-                <h3>Data Science</h3>
-                <p>Master data analysis, visualization, and machine learning with Python and R.</p>
+            <!-- Question 2 -->
+            <div class="question">
+                <p>2. Who wrote "Hamlet"?</p>
+                <ul class="answers">
+                    <li><input type="radio" name="q2" value="A"> A) William Shakespeare</li>
+                    <li><input type="radio" name="q2" value="B"> B) Charles Dickens</li>
+                    <li><input type="radio" name="q2" value="C"> C) Jane Austen</li>
+                    <li><input type="radio" name="q2" value="D"> D) Mark Twain</li>
+                </ul>
             </div>
-            <div class="course">
-                <h3>Digital Marketing</h3>
-                <p>Learn SEO, social media strategies, and advertising techniques to grow businesses online.</p>
+            <!-- Question 3 -->
+            <div class="question">
+                <p>3. What is the largest planet in our solar system?</p>
+                <ul class="answers">
+                    <li><input type="radio" name="q3" value="A"> A) Earth</li>
+                    <li><input type="radio" name="q3" value="B"> B) Mars</li>
+                    <li><input type="radio" name="q3" value="C"> C) Jupiter</li>
+                    <li><input type="radio" name="q3" value="D"> D) Saturn</li>
+                </ul>
             </div>
+            <button class="submit-btn" onclick="calculateScore()">Submit Quiz</button>
         </div>
-    </section>
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>Have any questions? Feel free to reach out!</p>
-        <p>Email: <a href="mailto:support@learnwithus.com">support@learnwithus.com</a></p>
-        <p>Phone: 123-456-7890</p>
-    </section>
+        <div id="result"></div>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Learn with Us. All rights reserved.</p>
-    </footer>
+    <script>
+        function calculateScore() {
+            let score = 0;
+
+            // Check answer for Question 1
+            if (document.querySelector('input[name="q1"]:checked')?.value === 'A') {
+                score++;
+            }
+
+            // Check answer for Question 2
+            if (document.querySelector('input[name="q2"]:checked')?.value === 'A') {
+                score++;
+            }
+
+            // Check answer for Question 3
+            if (document.querySelector('input[name="q3"]:checked')?.value === 'C') {
+                score++;
+            }
+
+            // Display result
+            let resultMessage = `You scored ${score} out of 3.`;
+            document.getElementById('result').innerText = resultMessage;
+        }
+    </script>
 
 </body>
 </html>
