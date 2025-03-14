@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Learning Module</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+<div class="module-container">
+    <header>
+        <h1>Learn Web Development Basics</h1>
+        <p>Interactive, Step-by-Step Learning Module</p>
+    </header>
+
+    <!-- Lesson 1 -->
+    <section id="lesson1" class="lesson">
+        <h2>Lesson 1: Introduction to HTML</h2>
+        <p>HTML (HyperText Markup Language) is the backbone of web development. It structures the content on the web.</p>
+        <pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Hello, world!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <button id="next1" class="btn">Next Lesson</button>
+    </section>
+
+    <!-- Lesson 2 -->
+    <section id="lesson2" class="lesson" style="display:none;">
+        <h2>Lesson 2: HTML Tags</h2>
+        <p>HTML uses tags to define content. Some common tags include &lt;p&gt; for paragraphs and &lt;h1&gt; for headings.</p>
+        <button id="next2" class="btn">Next Lesson</button>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz" class="quiz-section" style="display:none;">
+        <h3>Quiz: Test Your Knowledge</h3>
+        <form id="quizForm">
+            <p>What does HTML stand for?</p>
+            <label>
+                <input type="radio" name="question1" value="HyperText Markup Language"> HyperText Markup Language
+            </label><br>
+            <label>
+                <input type="radio" name="question1" value="HomeTool Markup Language"> HomeTool Markup Language
+            </label><br>
+            <label>
+                <input type="radio" name="question1" value="Hyperlinks and Text Markup Language"> Hyperlinks and Text Markup Language
+            </label><br>
+            <button type="submit" id="submitQuiz" class="btn">Submit Answer</button>
+        </form>
+        <div id="quizResult"></div>
+    </section>
+
+    <!-- Conclusion -->
+    <section id="conclusion" class="conclusion" style="display:none;">
+        <h3>Congratulations!</h3>
+        <p>You've completed the module. Great work!</p>
+        <button id="restart" class="btn">Restart Module</button>
+    </section>
+
+    <footer>
+        <p>Interactive Learning Module</p>
+    </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
