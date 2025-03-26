@@ -1,95 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projecte Llegim</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Results</title>
+  <style>
+    .star {
+      font-size: 30px;
+      color: gold;
+    }
+  </style>
 </head>
 <body>
 
-<div class="module-container">
-    <header>
-        <h1>Projecte Llegim</h1>
-        <p>Llegim per millorar el nostre nivell de català</p>
-    </header>
+  <div id="quiz-container">
+    <button onclick="checkResults()">Check Results</button>
+    <div id="result"></div>
+  </div>
 
-    <!-- Lesson 1 -->
-    <section id="lesson1" class="lesson">
-    <h2>Llegim </h2>
-    <h1>Ciutat Vella vol frenar les botigues de records i fundes de mòbil</h1>
-    <p>El tinent d’alcaldia de Seguretat de Barcelona, Albert Batlle, va posar en dubte ahir la continuïtat de negocis específics al districte de Ciutat Vella. En una entrevista a l’agència ACN va defensar que cal “eliminar” del districte les activitats que “no aporten res”, i va citar com a exemple les conegudes botigues de complements per a mòbils.
-<p>Batlle va dir que cal mirar com suprimir o “restringir” aquestes o altres activitats econòmiques, com els locals de records. “Vendre carcasses de mòbils, quina aportació té?”, es va preguntar Batlle. Tambe va qüestionar com aquests establiments poden pagar lloguers de 5.000 euros, i va demanar la implicació de l’Agència Tributària per aclarir-ho.</p>
-    <button id="next1" class="btn">Next Lesson</button>
-</section>
+  <script>
+    function checkResults() {
+      let score = 85;  // Example score
+      let resultDiv = document.getElementById("result");
 
- <div class="content">
-        <h2>Drag the Box and Drop it in the Area</h2>
+      if (score >= 80) {
+        resultDiv.innerHTML = `Congrats! You scored ${score}% <span class="star">⭐</span>`;
+      } else {
+        resultDiv.innerHTML = `You scored ${score}%`;
+      }
+    }
+  </script>
 
-        <div id="drag-item" draggable="true">
-            Drag me
-        </div>
-
-        <div id="drop-area">
-            Drop here
-        </div>
-    </div>
-
-    <script>
-        // Get the draggable element and the drop area
-        const dragItem = document.getElementById('drag-item');
-        const dropArea = document.getElementById('drop-area');
-
-        // Set up the drag start event
-        dragItem.addEventListener('dragstart', (event) => {
-            event.dataTransfer.setData('text/plain', dragItem.id);
-            dragItem.style.opacity = '0.5';
-        });
-
-        // Set up the drag end event
-        dragItem.addEventListener('dragend', () => {
-            dragItem.style.opacity = '1';
-        });
-
-        // Set up the drag over event for the drop area
-        dropArea.addEventListener('dragover', (event) => {
-            event.preventDefault();
-            dropArea.classList.add('over');
-        });
-
-        // Set up the drag leave event for the drop area
-        dropArea.addEventListener('dragleave', () => {
-            dropArea.classList.remove('over');
-        });
-
-        // Set up the drop event for the drop area
-        dropArea.addEventListener('drop', (event) => {
-            event.preventDefault();
-            dropArea.classList.remove('over');
-            
-            const draggedElementId = event.dataTransfer.getData('text');
-            const draggedElement = document.getElementById(draggedElementId);
-            
-            // Append the dragged element into the drop area
-            dropArea.appendChild(draggedElement);
-            draggedElement.style.position = 'absolute';
-            draggedElement.style.left = `${event.offsetX - draggedElement.offsetWidth / 2}px`;
-            draggedElement.style.top = `${event.offsetY - draggedElement.offsetHeight / 2}px`;
-        });
-    </script>
-
-    <!-- Conclusion -->
-    <section id="conclusion" class="conclusion" style="display:none;">
-        <h3>Congratulations!</h3>
-        <p>You've completed the module. Great work!</p>
-        <button id="restart" class="btn">Restart Module</button>
-    </section>
-
-    <footer>
-        <p>Interactive Learning Module</p>
-    </footer>
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>
