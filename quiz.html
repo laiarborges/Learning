@@ -73,16 +73,17 @@
 
     // Function to submit the quiz and calculate the score
     function submitQuiz() {
-        let score = 0;
-        questions.forEach((question, index) => {
-            const selectedAnswer = document.querySelector(`input[name="q${index}"]:checked`);
-            if (selectedAnswer) {
-                const answerIndex = selectedAnswer.value;
-                if (answerIndex === question.correct) {
-                    score++;
-                }
+    let score = 0;
+    questions.forEach((question, index) => {
+        const selectedAnswer = document.querySelector(`input[name="q${index}"]:checked`);
+        
+        if (selectedAnswer) {
+            const answerValue = selectedAnswer.value;  // Store the selected answer's value
+            
+            // Compare the selected answer with the correct one (trimmed for safety)
+            if (answerValue.trim() === question.correct.trim()) {
+                score++;  // Increase score if the answer is correct
             }
-        });
 
         const result = document.getElementById('result');
         result.textContent = `You scored ${score} out of ${questions.length}`;
