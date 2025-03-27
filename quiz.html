@@ -1,18 +1,96 @@
 <!DOCTYPE html>
 <html>
-  <head>Shane Quiz</head>
+  <title>Shane Quiz</title>
   <style>
-    h1{
+    h2{
       color:blue
       font: bold, 32px, Impact}
     body{
-      font-family: sans-serif}
+      font-family: Arial, sans-serif}
     .quizcontainer{width: 500px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid ##00008B;
-    border-radius: 5px;
+    border-radius: 5px;}
+    .question {
+      font-size: 18px;
+      margin-bottom: 15px;
+        }
+    .answer {
+            margin-bottom: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
   </style>
-  <h1>Test your knowledge on the chicken man</h1>
+<body>
+<div class="quiz-container">
+    <h2>Test your knowledge on the chicken man</h2>
+    <div id="quiz">
+ </div>
+    <button onclick="submitQuiz()">Submit</button>
+    <div class="result" id="result"></div>
+</div>
 
+<script>
+    const questions = [
+        {
+            question: "What is his chicken's name?",
+            answers: ["Charlie"],
+            correct: 0
+        },
+        {
+            question: "What is his favourite food?",
+            answers: ["pizza", "pepper poppers"],
+            correct: 0
+        },
+        {
+            question: "Where can you most often find him?",
+            answers: ["forest", "saloon", "jojamart"],
+            correct: 0
+        }
+    ];
+
+    let userAnswers = [];
+
+    // Function to display questions
+    function loadQuiz() {
+        const quizContainer = document.getElementById('quiz');
+        questions.forEach((question, index) => {
+            let questionElement = `<div class="question">${question.question}</div>`;
+            question.answers.forEach((answer, i) => {
+                questionElement += `
+                    <label class="answer">
+                        <input type="radio" name="q${index}" value="${i}">
+                        ${answer}
+                    </label>
+                `;
+            });
+            quizContainer.innerHTML += questionElement;
+        });
+    }
+
+    // Function to submit the quiz and calculate the score
+    function submitQuiz() {
+        let score = 0;
+        questions.forEach((question, index) => {
+            const selectedAnswer = document.querySelector(`input[name="q${index}"]:checked`);
+            if (selectedAnswer) {
+                const answerIndex = parseInt(selectedAnswer.value);
+                if (answerIndex === question.correct) {
+                    score++;
+                }
+            }
+        });
+
+        const result = document.getElementById('result');
+        result.textContent = `You scored ${score} out of ${questions.length}`;
+
+    }
+
+    // Load the quiz when the page is ready
+    loadQuiz();
+</script>
+</body>
 </html>
