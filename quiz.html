@@ -77,7 +77,7 @@
         questions.forEach((question, index) => {
             const selectedAnswer = document.querySelector(`input[name="q${index}"]:checked`);
             if (selectedAnswer) {
-                const answerIndex = parseInt(selectedAnswer.value);
+                const answerIndex = selectedAnswer.value;
                 if (answerIndex === question.correct) {
                     score++;
                 }
