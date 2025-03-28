@@ -74,19 +74,23 @@
         }
 
         function checkAnswer(choiceIndex) {
-            const currentQuestion = quizQuestions[currentQuestionIndex];
-            if (choiceIndex === currentQuestion.correct) {
-                score++;
-                document.getElementById("score").textContent = `Score: ${score}`;
-            }
-            currentQuestionIndex++;
-
-            if (currentQuestionIndex < quizQuestions.length) {
-                loadQuestion();
-            } else {
-                document.querySelector(".quiz-container").innerHTML = `<h2>Quiz Complete!</h2><p>Your final score is ${score}/${quizQuestions.length}</p>`;
-            }
-        }
+    console.log("User selected:", choiceIndex);  
+    const currentQuestion = quizQuestions[currentQuestionIndex];
+    console.log("Correct answer index:", currentQuestion.correct); 
+    if (choiceIndex === currentQuestion.correct) {
+        score++;
+        console.log("Correct! New score:", score);
+        document.getElementById("score").textContent = `Score: ${score}`;
+    } else {
+        console.log("Wrong answer!");
+    }
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizQuestions.length) {
+        loadQuestion();
+    } else {
+        document.querySelector(".quiz-container").innerHTML = `<h2>Quiz Complete!</h2><p>Your final score is ${score}/${quizQuestions.length}</p>`;
+    }
+}
 
         // Load the first question when the page starts
         loadQuestion();
