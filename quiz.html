@@ -30,6 +30,10 @@
             width: 80%; 
             cursor: pointer;
         }
+      .message-container {
+          display: none; /* Initially hidden */
+          text-align: center;
+          margin-top: 20px;
     </style>
   </head>
   <body>
@@ -125,17 +129,16 @@ function checkAnswer(choiceIndex) {
     currentQuestionIndex++;
 
     if (currentQuestionIndex < quizQuestions.length) {
-        loadQuestion();
-    } else {
-        console.log("🎉 Quiz finished! Final score:", score);
-        document.querySelector(".quiz-container").innerHTML = 
-            `<h2>Quiz Complete!</h2><p>Your final score is ${score}/${quizQuestions.length}</p>`;
-        document.getElementById("message-container").style.display = "block";
-    }
-}
+                loadQuestion();
+            } else {
+                console.log("🎉 Quiz finished! Final score:", score);
+                document.querySelector(".quiz-container").style.display = "none"; // Hide the quiz container
+                document.getElementById("message-container").style.display = "block"; // Show the message container
+            }
+        }
 
-        // ✅ Load the first question when the page starts
+        // Load the first question when the page starts
         loadQuestion();
     </script>
-  </body>
+</body>
 </html>
