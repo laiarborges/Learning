@@ -4,3 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hardcore Shane Quiz</title>
+<style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background-color: darkblue; /* Light blue background */
+            color: black; /* Ensure good contrast */
+        }
+        .quiz-container { 
+            width: 50%; 
+            margin: auto; 
+            padding: 20px; 
+            border: 1px solid #ddd; 
+            border-radius: 10px; 
+            background: white;
+        }
+        .choices { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+        .choices button { 
+            display: block; 
+            margin: 10px auto; 
+            padding: 10px; 
+            width: 80%; 
+            cursor: pointer;
+        }
+        /* Style for the final message and score */
+        .final-message {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2 id="question">Question will appear here</h2>
+        <div class="choices">
+            <button onclick="checkAnswer(0)">Option 1</button>
+            <button onclick="checkAnswer(1)">Option 2</button>
+            <button onclick="checkAnswer(2)">Option 3</button>
+            <button onclick="checkAnswer(3)">Option 4</button>
+        </div>
+        <p id="score">Score: 0</p>
+
+        <!-- Final Message and Score (will appear after quiz finishes) -->
+        <div class="final-message" id="final-message" style="display: none;">
+            <p id="final-score">Your final score is: 0</p>
+            <p>Back to main page:</p>
+            <button onclick="window.location.href='http://laiarborges.github.io/Learning/';">Back</button>
+        </div>
+    </div>
+
+    <script>
+        const quizQuestions = [
+            { 
+                question: "Question 1",
+                choices: ["A", "B", "C"], 
+                correct: 2 
+            },
+            { 
+                question: "Question 2",
+                choices: ["A", "B", "C", "D"],
+                correct: 1 
+            },
+            { 
+                question: "Question 3",
+                choices: ["A", "B", "C", "D"],
+                correct: 0 
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            console.log("✅ Loading question:", currentQuestionIndex);
+
+            const questionElement = document.getElementById("question");
+            const choiceButtons = document.querySelectorAll(".choices button");
+
+            if (!questionElement || choiceButtons.length === 0) {
+                console.error("❌ ERROR: Elements not found!");
+                return;
+            }
+
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+
+            // Update the question text
+            questionElement.textContent = currentQuestion.question;
+
+            // Update each button with answer choices
+            choiceButtons.forEach((button, index) => {
+                if (currentQuestion.choices[index] !== undefined) {
+                    button.textContent = currentQuestion.choices[index];
+                    button.style.display = "block"; // Ensure buttons are visible
+                } else {
+                    button.style.display = "none"; // Hide extra buttons if needed
+                }
+            });
+        }
+
+        function checkAnswer(choiceIndex) {
+            console.log("🟡 User clicked:", choiceIndex);  // Log the clicked answer
+
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+
+            if (!currentQuestion) {
+                console.error("❌ ERROR: No question found at index", currentQuestionIndex);
+                return;
+            }
+
+            console.log("🔹 Current question:", currentQuestion.question);
+            console.log("🟢 Correct answer index:", currentQuestion.correct); 
+            console.log("🔍 Type of choiceIndex:", typeof choiceIndex);
+            console.log("🔍 Type of correct answer:", typeof currentQuestion.correct);
+
+            // Convert values to numbers and compare
+            if (Number(choiceIndex) === Number(currentQuestion.correct)) {  
+                score++;
+                console.log("✅ Correct! New score:", score);
+                document.getElementById("score").textContent = `Score: ${score}`;
+            } else {
+                console.log("❌ Wrong answer!");
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                console.log("Quiz finished! Final score:", score);
+                // Show final message and score without hiding the quiz container
+                document.getElementById("final-score").textContent = `Your final score is: ${score}`;
+                document.getElementById("final-message").style.display = "block";  // Show the final message
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
