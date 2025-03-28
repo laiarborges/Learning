@@ -101,7 +101,7 @@
 
             console.log("🟢 Correct answer index:", currentQuestion.correct); // Debugging log
 
-            if (choiceIndex === currentQuestion.correct) {
+            if (parseInt(choiceIndex) === parseInt(currentQuestion.correct)) {
                 score++;
                 console.log("✅ Correct! New score:", score);
                 document.getElementById("score").textContent = `Score: ${score}`;
