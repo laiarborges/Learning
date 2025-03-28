@@ -43,6 +43,10 @@
         </div>
         <p id="score">Score: 0</p>
     </div>
+    <div class="message-container" id="message-container">
+        <p>Too easy? Try a <b>hardcore</b> quiz next!</p>
+        <button onclick="window.location.href='https://www.example.com';">Go to Hardcore Quiz</button>
+    </div>
 
     <script>
         // ✅ Corrected the quizQuestions array
@@ -126,6 +130,7 @@ function checkAnswer(choiceIndex) {
         console.log("🎉 Quiz finished! Final score:", score);
         document.querySelector(".quiz-container").innerHTML = 
             `<h2>Quiz Complete!</h2><p>Your final score is ${score}/${quizQuestions.length}</p>`;
+        document.getElementById("message-container").style.display = "block";
     }
 }
 
