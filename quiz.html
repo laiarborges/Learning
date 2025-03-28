@@ -1,5 +1,6 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shane Quiz</title>
@@ -7,7 +8,7 @@
         body { 
             font-family: Arial, sans-serif; 
             text-align: center; 
-            background-color: blue; /* Light blue background */
+            background-color: lightblue; /* Light blue background */
             color: black; /* Ensure good contrast */
         }
         .quiz-container { 
@@ -30,14 +31,14 @@
             width: 80%; 
             cursor: pointer;
         }
-      .message-container {
-          display: none; /* Initially hidden */
-          color: white
-          text-align: center;
-          margin-top: 20px;
+        /* Style for the final message and score */
+        .final-message {
+            font-size: 18px;
+            margin-top: 20px;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="quiz-container">
         <h2 id="question">Question will appear here</h2>
         <div class="choices">
@@ -47,29 +48,31 @@
             <button onclick="checkAnswer(3)">Option 4</button>
         </div>
         <p id="score">Score: 0</p>
-    </div>
-    <div class="message-container" id="message-container">
-        <p>Too easy? Try a <b>hardcore</b> quiz next!</p>
-        <button onclick="window.location.href='https://www.example.com';">Go to Hardcore Quiz</button>
+
+        <!-- Final Message and Score (will appear after quiz finishes) -->
+        <div class="final-message" id="final-message" style="display: none;">
+            <p id="final-score">Your final score is: 0</p>
+            <p>Too easy? Try a <b>hardcore</b> quiz next!</p>
+            <button onclick="window.location.href='https://www.example.com';">Go to Hardcore Quiz</button>
+        </div>
     </div>
 
     <script>
-        // ✅ Corrected the quizQuestions array
         const quizQuestions = [
             { 
                 question: "What is his favourite food?",
                 choices: ["Pizza", "Pepper Poppers", "All of the above"], 
-                correct: 2  // Answer index (All of the above)
+                correct: 3  // Answer index (All of the above)
             },
             { 
                 question: "What is his chicken's name?",
                 choices: ["Marnie", "Charlie", "Krobus", "Lewis"],
-                correct: 1  // Answer index
+                correct: 2  // Answer index (Krobus)
             },
             { 
                 question: "What is his favourite team?",
                 choices: ["Zuzu City Tunnelers", "Toronto Maple Leafs", "Buffalo Bills", "FC Barcelona"],
-                correct: 0  // Answer index
+                correct: 1  // Answer index (Toronto Maple Leafs)
             }
         ];
 
@@ -103,38 +106,39 @@
             });
         }
 
-function checkAnswer(choiceIndex) {
-    console.log("🟡 User clicked:", choiceIndex);  // Log the clicked answer
+        function checkAnswer(choiceIndex) {
+            console.log("🟡 User clicked:", choiceIndex);  // Log the clicked answer
 
-    const currentQuestion = quizQuestions[currentQuestionIndex];
+            const currentQuestion = quizQuestions[currentQuestionIndex];
 
-    if (!currentQuestion) {
-        console.error("❌ ERROR: No question found at index", currentQuestionIndex);
-        return;
-    }
+            if (!currentQuestion) {
+                console.error("❌ ERROR: No question found at index", currentQuestionIndex);
+                return;
+            }
 
-    console.log("🔹 Current question:", currentQuestion.question);
-    console.log("🟢 Correct answer index:", currentQuestion.correct); 
-    console.log("🔍 Type of choiceIndex:", typeof choiceIndex);
-    console.log("🔍 Type of correct answer:", typeof currentQuestion.correct);
+            console.log("🔹 Current question:", currentQuestion.question);
+            console.log("🟢 Correct answer index:", currentQuestion.correct); 
+            console.log("🔍 Type of choiceIndex:", typeof choiceIndex);
+            console.log("🔍 Type of correct answer:", typeof currentQuestion.correct);
 
-    // Convert values to numbers and compare
-    if (Number(choiceIndex) === Number(currentQuestion.correct)) {  
-        score++;
-        console.log("✅ Correct! New score:", score);
-        document.getElementById("score").textContent = `Score: ${score}`;
-    } else {
-        console.log("❌ Wrong answer!");
-    }
+            // Convert values to numbers and compare
+            if (Number(choiceIndex) === Number(currentQuestion.correct)) {  
+                score++;
+                console.log("✅ Correct! New score:", score);
+                document.getElementById("score").textContent = `Score: ${score}`;
+            } else {
+                console.log("❌ Wrong answer!");
+            }
 
-    currentQuestionIndex++;
+            currentQuestionIndex++;
 
-    if (currentQuestionIndex < quizQuestions.length) {
+            if (currentQuestionIndex < quizQuestions.length) {
                 loadQuestion();
             } else {
                 console.log("🎉 Quiz finished! Final score:", score);
-                document.querySelector(".quiz-container").style.display = "none"; // Hide the quiz container
-                document.getElementById("message-container").style.display = "block"; // Show the message container
+                // Show final message and score without hiding the quiz container
+                document.getElementById("final-score").textContent = `Your final score is: ${score}`;
+                document.getElementById("final-message").style.display = "block";  // Show the final message
             }
         }
 
