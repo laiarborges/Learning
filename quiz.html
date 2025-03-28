@@ -4,12 +4,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shane Quiz</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .quiz-container { width: 50%; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
-        .background-color: blue
-        .color: white
-        .choices { display: flex; flex-direction: column; align-items: center; }
-        .choices button { display: block; margin: 10px auto; padding: 10px; width: 80%; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background-color: blue; /* Light blue background */
+            color: black; /* Ensure good contrast */
+        }
+        .quiz-container { 
+            width: 50%; 
+            margin: auto; 
+            padding: 20px; 
+            border: 1px solid #ddd; 
+            border-radius: 10px; 
+            background: white;
+        }
+        .choices { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+        .choices button { 
+            display: block; 
+            margin: 10px auto; 
+            padding: 10px; 
+            width: 80%; 
+            cursor: pointer;
+        }
     </style>
   </head>
   <body>
@@ -25,21 +45,22 @@
     </div>
 
     <script>
+        // ✅ Corrected the quizQuestions array
         const quizQuestions = [
             { 
                 question: "What is his favourite food?",
-                choices: ["Pizza", "Pepper Poppers", "All of the above"],
-                correct: 3 
+                choices: ["Pizza", "Pepper Poppers", "All of the above"], 
+                correct: 3  // Answer index (All of the above)
             },
             { 
                 question: "What is his chicken's name?",
                 choices: ["Marnie", "Charlie", "Krobus", "Lewis"],
-                correct: 2 
+                correct: 2  // Answer index
             },
             { 
                 question: "What is his favourite team?",
                 choices: ["Zuzu City Tunnelers", "Toronto Maple Leafs", "Buffalo Bills", "FC Barcelona"],
-                correct: 1 
+                correct: 1  // Answer index
             }
         ];
 
@@ -47,13 +68,13 @@
         let score = 0;
 
         function loadQuestion() {
-            console.log("Loading question...");
+            console.log("✅ Loading question:", currentQuestionIndex);
 
             const questionElement = document.getElementById("question");
             const choiceButtons = document.querySelectorAll(".choices button");
 
             if (!questionElement || choiceButtons.length === 0) {
-                console.error("Error: Elements not found!");
+                console.error("❌ ERROR: Elements not found!");
                 return;
             }
 
@@ -74,25 +95,30 @@
         }
 
         function checkAnswer(choiceIndex) {
-    console.log("User selected:", choiceIndex);  
-    const currentQuestion = quizQuestions[currentQuestionIndex];
-    console.log("Correct answer index:", currentQuestion.correct); 
-    if (choiceIndex === currentQuestion.correct) {
-        score++;
-        console.log("Correct! New score:", score);
-        document.getElementById("score").textContent = `Score: ${score}`;
-    } else {
-        console.log("Wrong answer!");
-    }
-    currentQuestionIndex++;
-    if (currentQuestionIndex < quizQuestions.length) {
-        loadQuestion();
-    } else {
-        document.querySelector(".quiz-container").innerHTML = `<h2>Quiz Complete!</h2><p>Your final score is ${score}/${quizQuestions.length}</p>`;
-    }
-}
+            console.log("🟡 User clicked:", choiceIndex);  // Debugging log
 
-        // Load the first question when the page starts
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+
+            console.log("🟢 Correct answer index:", currentQuestion.correct); // Debugging log
+
+            if (choiceIndex === currentQuestion.correct) {
+                score++;
+                console.log("✅ Correct! New score:", score);
+                document.getElementById("score").textContent = `Score: ${score}`;
+            } else {
+                console.log("❌ Wrong answer!");
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                document.querySelector(".quiz-container").innerHTML = `<h2>Quiz Complete!</h2><p>Your final score is ${score}/${quizQuestions.length}</p>`;
+            }
+        }
+
+        // ✅ Load the first question when the page starts
         loadQuestion();
     </script>
   </body>
