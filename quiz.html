@@ -94,29 +94,40 @@
             });
         }
 
-        function checkAnswer(choiceIndex) {
-            console.log("🟡 User clicked:", choiceIndex);  // Debugging log
+function checkAnswer(choiceIndex) {
+    console.log("🟡 User clicked:", choiceIndex);  // Log the clicked answer
 
-            const currentQuestion = quizQuestions[currentQuestionIndex];
+    const currentQuestion = quizQuestions[currentQuestionIndex];
 
-            console.log("🟢 Correct answer index:", currentQuestion.correct); // Debugging log
+    if (!currentQuestion) {
+        console.error("❌ ERROR: No question found at index", currentQuestionIndex);
+        return;
+    }
 
-            if (parseInt(choiceIndex) === parseInt(currentQuestion.correct)) {
-                score++;
-                console.log("✅ Correct! New score:", score);
-                document.getElementById("score").textContent = `Score: ${score}`;
-            } else {
-                console.log("❌ Wrong answer!");
-            }
+    console.log("🔹 Current question:", currentQuestion.question);
+    console.log("🟢 Correct answer index:", currentQuestion.correct); 
+    console.log("🔍 Type of choiceIndex:", typeof choiceIndex);
+    console.log("🔍 Type of correct answer:", typeof currentQuestion.correct);
 
-            currentQuestionIndex++;
+    // Convert values to numbers and compare
+    if (Number(choiceIndex) === Number(currentQuestion.correct)) {  
+        score++;
+        console.log("✅ Correct! New score:", score);
+        document.getElementById("score").textContent = `Score: ${score}`;
+    } else {
+        console.log("❌ Wrong answer!");
+    }
 
-            if (currentQuestionIndex < quizQuestions.length) {
-                loadQuestion();
-            } else {
-                document.querySelector(".quiz-container").innerHTML = `<h2>Quiz Complete!</h2><p>Your final score is ${score}/${quizQuestions.length}</p>`;
-            }
-        }
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < quizQuestions.length) {
+        loadQuestion();
+    } else {
+        console.log("🎉 Quiz finished! Final score:", score);
+        document.querySelector(".quiz-container").innerHTML = 
+            `<h2>Quiz Complete!</h2><p>Your final score is ${score}/${quizQuestions.length}</p>`;
+    }
+}
 
         // ✅ Load the first question when the page starts
         loadQuestion();
