@@ -12,17 +12,26 @@
    import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import java.net.URL;
+
 public class AlertWithImage {
     public static void main(String[] args) {
-        // Create an ImageIcon
-        ImageIcon icon = new ImageIcon("https://stardewvalleywiki.com/mediawiki/images/9/9d/Shane_Concerned.png");
+        try {
+            // Create an ImageIcon from a URL
+            URL imageURL = new URL("https://stardewvalleywiki.com/mediawiki/images/9/9d/Shane_Concerned.png");
+            ImageIcon icon = new ImageIcon(imageURL);
         
-        // Show a message dialog with an image
-        JOptionPane.showMessageDialog(null, 
-            "I don't know you. What are you doing here?", // Message
-            "Don't you have work to do?", // Title
-            JOptionPane.INFORMATION_MESSAGE, // Message type
-            icon); // Add the image icon
+            // Show a message dialog with an image
+            JOptionPane.showMessageDialog(null, 
+                "I don't know you. What are you doing here?", // Message
+                "Don't you have work to do?", // Title
+                JOptionPane.INFORMATION_MESSAGE, // Message type
+                icon); // Add the image icon
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exceptions if the URL is incorrect or cannot be accessed
+        }
     }
 }
   </script>
