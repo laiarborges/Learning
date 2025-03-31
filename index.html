@@ -5,56 +5,52 @@
     h1 {
       color:blue;
       font: bold 36px impact, sans-serif;}
-  </style>
-   <header> <h1> This is a Shane fanpage </header> </h1>
-  </head>
-  <script>
-
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import java.net.URL;
-
-public class AlertWithImage {
-    public static void main(String[] args) {
-        try {
-            // Create an ImageIcon from a URL
-            URL imageURL = new URL("https://stardewvalleywiki.com/mediawiki/images/9/9d/Shane_Concerned.png");
-            ImageIcon icon = new ImageIcon(imageURL);
-        
-            // Show a message dialog with an image
-            JOptionPane.showMessageDialog(null, 
-                "I don't know you. What are you doing here?", // Message
-                "Don't you have work to do?", // Title
-                JOptionPane.INFORMATION_MESSAGE, // Message type
-                icon); // Add the image icon
-        } catch (Exception e) {
-            e.printStackTrace(); // Handle exceptions if the URL is incorrect or cannot be accessed
-        }
-    }
-}
-  </script>
-  <div>
-  <body>
-  <style>
     p {
       color:black;
       font: 21px impact, sans-serif;}
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: light-blue;
+      color: white;
+      border-radius: 10px;
+      text-align: center;
+    }
+    #popup img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 10px;
+    }
   </style>
-    <p>Chicken farmer I love you </p>
-  </body>
-  </div>
-  <div>
+  </head>
   <body>
+   <h1> This is a Shane fanpage </h1>
+    <p>Chicken farmer I love you </p>
   <a href= "https://stardewvalleywiki.com/Shane" > Silly goose</a>
-  </body>
-  </div>
-  <div>
+   <div id="popup">
+        <h2>Don't you have work to do?</h2>
+        <p>I don't know you. What are you doing here?</p>
+        <img src="https://stardewvalleywiki.com/mediawiki/images/9/9d/Shane_Concerned.png" alt="Shane Concerned">
+        <br>
+        <button onclick="closePopup()">Close</button>
     <img src= "https://stardewvalleywiki.com/mediawiki/images/8/8b/Shane.png" alt="Shane"
       width="300"
       height="300">
-  </div>
-  <div>
    <p>Think you know everything about him? Take this quiz to find out:</p>
     <button onclick="window.location='quiz.html';">Quiz </button>
   </div>
+  <script>
+        // Function to show the popup
+        function showPopup() {
+            document.getElementById("popup").style.display = "block"; // Show the popup
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById("popup").style.display = "none"; // Hide the popup
+        }
+    </script>
 </html>
