@@ -14,7 +14,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       padding: 20px;
-      background-color: light-blue;
+      background-color: lightblue;
       color: white;
       border-radius: 10px;
       text-align: center;
@@ -43,11 +43,9 @@
     <button onclick="window.location='quiz.html';">Quiz </button>
   </div>
   <script>
-        // Function to show the popup
-        function showPopup() {
-            document.getElementById("popup").style.display = "block"; // Show the popup
-        }
-
+        window.onload = function() {
+        document.getElementById("popup").style.display = "block"; // Show the popup
+      }
         // Function to close the popup
         function closePopup() {
             document.getElementById("popup").style.display = "none"; // Hide the popup
