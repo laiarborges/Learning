@@ -42,18 +42,18 @@
    <h1> This is a Shane fanpage </h1>
     <p>Chicken farmer I love you </p>
   <a href= "https://stardewvalleywiki.com/Shane" > Silly goose</a>
-   <div id="popup">
-        <h2>Don't you have work to do?</h2>
-        <p>I don't know you. What are you doing here?</p>
-        <img src="https://stardewvalleywiki.com/mediawiki/images/9/9d/Shane_Concerned.png" alt="Shane Concerned">
-        <br>
-        <button onclick="closePopup()">Close</button>
     <img src= "https://stardewvalleywiki.com/mediawiki/images/8/8b/Shane.png" alt="Shane"
       width="300"
       height="300">
    <p>Think you know everything about him? Take this quiz to find out:</p>
     <button onclick="window.location='quiz.html';">Quiz </button>
-  </div>
+     <div id="popup">
+        <h2>Don't you have work to do?</h2>
+        <p>I don't know you. What are you doing here?</p>
+        <img src="https://stardewvalleywiki.com/mediawiki/images/9/9d/Shane_Concerned.png" alt="Shane Concerned">
+        <br>
+        <button onclick="closePopup()">Close</button>
+     </div>
   <script>
        function closePopup() {
         document.getElementById("popup-overlay").style.display = "none"; // Hide the popup overlay
