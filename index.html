@@ -5,31 +5,35 @@
     h1 {
       color:blue;
       font: bold 36px impact, sans-serif;}
+    h2{
+      color:blue;
+      font: bold 28px Arial, sans-serif;}
     p {
       color:black;
-      font: 21px impact, sans-serif;}
+      font: 21px Arial, sans-serif;}
      #popup-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+        background-color: rgba(2, 4, 81, 0.83); 
         display: none; /* Hidden by default */
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         z-index: 9999; /* Ensures it's on top of everything */
       }
     #popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
+      position: relative;
+      top: 20px;
       transform: translate(-50%, -50%);
       padding: 20px;
       background-color: lightblue;
       color: white;
       border-radius: 10px;
       text-align: center;
+      width: 80%;
+      max-width: 600px;
       z-index: 10000;
     }
     #popup img {
