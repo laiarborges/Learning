@@ -8,6 +8,24 @@
   </style>
    <header> <h1> This is a Shane fanpage </header> </h1>
   </head>
+  <script>
+   import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
+public class AlertWithImage {
+    public static void main(String[] args) {
+        // Create an ImageIcon
+        ImageIcon icon = new ImageIcon("https://stardewvalleywiki.com/mediawiki/images/9/9d/Shane_Concerned.png");
+        
+        // Show a message dialog with an image
+        JOptionPane.showMessageDialog(null, 
+            "I don't know you. What are you doing here?", // Message
+            "Don't you have work to do?", // Title
+            JOptionPane.INFORMATION_MESSAGE, // Message type
+            icon); // Add the image icon
+    }
+}
+  </script>
   <div>
   <body>
   <style>
