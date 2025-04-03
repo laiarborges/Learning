@@ -9,17 +9,22 @@
     }
     #Shane {
       width: 200px;
-      height: 200px;
+      height: 250px;  /* Adjusted height to give space for text */
       border: 2px solid blue;
       margin-top: 20px;
       position: relative;
+      display: flex;
+      flex-direction: column; /* Stack the elements vertically */
+      justify-content: center; /* Center align the image and text vertically */
+      align-items: center; /* Center align the content horizontally */
+      text-align: center;
     }
     #Shane img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    #dragItem {
+    .dragItem {
       width: 30px;
       height: 30px;
       border: 2px solid blue;
@@ -27,21 +32,25 @@
       text-align: center;
       cursor: move;
       margin: 10px;
+      display: inline-block;
     }
-    #dragItem img {
+    .dragItem img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+    p {
+      margin: 0; /* Remove default margin on <p> to keep it tightly aligned */
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <h1>Interact with Shane!</h1>
-  <p>Will he answer? Who knows...
-  Click on an item and give it to Shane!</p>
+  <p>Will he answer? Who knows...</p>
 
   <!-- Draggable Item -->
-  <div id="dragItem" draggable="true">
+  <div id="dragItem1" class="dragItem" draggable="true">
     <img src="https://stardewvalleywiki.com/mediawiki/images/f/f1/Hot_Pepper.png" alt="Hot Pepper">
   </div>
 
@@ -51,38 +60,37 @@
   </div>
 
   <script>
-    const dragItem = document.getElementById('dragItem');
     const dropArea = document.getElementById('Shane');
 
-    // When dragging starts
-    dragItem.addEventListener('dragstart', (event) => {
-      console.log('Drag started');
-      event.dataTransfer.setData('text', event.target.id); // Store the dragged item's ID
+    // Function to handle drag start event
+    function handleDragStart(event) {
+      event.dataTransfer.setData('text', event.target.id);
+    }
+
+    // Add dragstart listener to each draggable item
+    document.querySelectorAll('.dragItem').forEach(item => {
+      item.addEventListener('dragstart', handleDragStart);
     });
 
     // Allow the drop area to accept the dragged item
     dropArea.addEventListener('dragover', (event) => {
-      console.log('Drag over');
-      event.preventDefault();  // This is crucial to allow dropping
+      event.preventDefault();  // Prevent default action to allow dropping
     });
 
-    // Handle the drop
+    // Handle the drop event
     dropArea.addEventListener('drop', (event) => {
-      console.log('Item dropped');
-      event.preventDefault(); // Prevent the default action (navigation)
+      event.preventDefault(); // Prevent default action (navigation)
 
-      // Get the dragged item using the ID
       const draggedItemId = event.dataTransfer.getData('text');
       const draggedItem = document.getElementById(draggedItemId);
-
-      // You can either append the dragged item to the drop area (or handle it however you like)
-      // dropArea.appendChild(draggedItem);  // This line is not necessary unless you want to move the item
 
       // Now, update Shane's image to a happy version
       const shaneImage = dropArea.querySelector('img'); // Get Shane's image
       shaneImage.src = 'https://stardewvalleywiki.com/mediawiki/images/9/92/Shane_Happy.png'; // Change to happy version
+
+      // Create a new <p> element to add text
       const textElement = document.createElement('p');
-      textElement.textContent = "Wow! How did you know this is my favorite?"; // Set the text content for the <p> tag
+      textElement.textContent = "Shane is happy!"; // Set the text content for the <p> tag
 
       // Insert the new <p> element above the image
       dropArea.insertBefore(textElement, shaneImage); // Insert the text above the image
