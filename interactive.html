@@ -26,6 +26,7 @@
       line-height: 30px;
       text-align: center;
       cursor: move;
+      margin: 10px;
     }
     #dragItem img {
       width: 100%;
@@ -38,49 +39,48 @@
   <h1>Interact with Shane!</h1>
   <p>Will he answer? Who knows...</p>
 
+  <!-- Draggable Item -->
   <div id="dragItem" draggable="true">
     <img src="https://stardewvalleywiki.com/mediawiki/images/f/f1/Hot_Pepper.png" alt="Hot Pepper">
   </div>
 
+  <!-- Drop Area -->
   <div id="Shane">
     <img src="https://stardewvalleywiki.com/mediawiki/images/8/8b/Shane.png" alt="Shane">
   </div>
 
- <script>
+  <script>
     const dragItem = document.getElementById('dragItem');
     const dropArea = document.getElementById('Shane');
 
     // When dragging starts
     dragItem.addEventListener('dragstart', (event) => {
-      console.log('Drag started'); // Debugging line
+      console.log('Drag started');
       event.dataTransfer.setData('text', event.target.id); // Store the dragged item's ID
     });
 
-    // Allow the drop area to accept the dragged item (this is necessary!)
+    // Allow the drop area to accept the dragged item
     dropArea.addEventListener('dragover', (event) => {
-      console.log('Drag over'); // Debugging line
+      console.log('Drag over');
       event.preventDefault();  // This is crucial to allow dropping
     });
 
     // Handle the drop
     dropArea.addEventListener('drop', (event) => {
-      console.log('Item dropped'); // Debugging line
+      console.log('Item dropped');
       event.preventDefault(); // Prevent the default action (navigation)
 
+      // Get the dragged item using the ID
       const draggedItemId = event.dataTransfer.getData('text');
       const draggedItem = document.getElementById(draggedItemId);
 
       // Move the dragged item to the drop area
       dropArea.appendChild(draggedItem);
 
-      // Change Shane's image to a happy version
-      const img = dropArea.querySelector('img');
-      img.src = 'https://stardewvalleywiki.com/mediawiki/images/9/92/Shane_Happy.png';
+      // Now, update Shane's image to a happy version
+      const shaneImage = dropArea.querySelector('img'); // Get Shane's image
+      shaneImage.src = 'https://stardewvalleywiki.com/mediawiki/images/9/92/Shane_Happy.png'; // Change to happy version
     });
   </script>
-  <div>
-    <p>Back to main page:</p>
-  <button onclick="window.location.href='http://laiarborges.github.io/Learning/';">Back</button>
-  </div>
 </body>
 </html>
