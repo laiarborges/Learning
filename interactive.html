@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<head>
+  <meta charset = "UTF-8">
+  <title>Interactive Shane</title>
+<style>
+  h1 {
+  }
+  #Shane {
+    width: 100px;
+    height: 100px;
+    border: 2px blue;
+    margin-top: 20px;
+    position: relative;
+        }
+  #Shane img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+   #dragItem {
+            width: 30px;
+            height: 30px;
+            border: 2px, blue;
+            line-height: 50px;
+            cursor: move;
+   }
+    #dragItem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+</style>
+</head>
+<body>
+  <h1>Interact with Shane!</h1>
+  <p>Will he answer? Who knows...</p>
+<div id = "dragItem" draggable="true">
+  <img src= https://stardewvalleywiki.com/mediawiki/images/f/f1/Hot_Pepper.png> </div>
+<div id = "Shane">
+  <img src= https://stardewvalleywiki.com/mediawiki/images/8/8b/Shane.png>
+</body>
+<script>
+const dragItem = document.getElementById('dragItem');
+const dropArea = document.getElementById('Shane');
+  dragItem.addEventListener('dragstart', (event) => {
+    event.dataTransfer.setData('text', event.target.id);
+    dropArea.addEventListener('dragover', (event) => {
+    event.preventDefault();
+      dropArea.addEventListener('drop', (event) => {
+    event.preventDefault();
+    const draggedItemId = event.dataTransfer.getData('text');
+    const draggedItem = document.getElementById(draggedItemId);
+          dropArea.appendChild(draggedItem);
+     const img = dropArea.querySelector('img');
+    img.src = 'https://stardewvalleywiki.com/mediawiki/images/9/92/Shane_Happy.png'
+    });
+</script>
+</html>
