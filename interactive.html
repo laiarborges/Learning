@@ -74,8 +74,8 @@
       const draggedItemId = event.dataTransfer.getData('text');
       const draggedItem = document.getElementById(draggedItemId);
 
-      // Move the dragged item to the drop area
-      dropArea.appendChild(draggedItem);
+      // You can either append the dragged item to the drop area (or handle it however you like)
+      // dropArea.appendChild(draggedItem);  // This line is not necessary unless you want to move the item
 
       // Now, update Shane's image to a happy version
       const shaneImage = dropArea.querySelector('img'); // Get Shane's image
