@@ -53,34 +53,58 @@
     const dragItem = document.getElementById('dragItem');
     const dropArea = document.getElementById('Shane');
 
-    // When dragging starts
+    // Function to simulate drag-and-drop behavior on mobile
+    let dragging = false;
+
+    // Handle touch events for mobile devices
+    dragItem.addEventListener('touchstart', (event) => {
+      console.log('Touch started');
+      dragging = true;
+      event.preventDefault(); // Prevent default touch behavior
+    });
+
+    dropArea.addEventListener('touchmove', (event) => {
+      console.log('Touch move');
+      if (dragging) {
+        event.preventDefault();
+      }
+    });
+
+    dropArea.addEventListener('touchend', (event) => {
+      console.log('Touch ended');
+      if (dragging) {
+        event.preventDefault();
+        // Simulate drop
+        updateShaneImage();
+        dragging = false;
+      }
+    });
+
+    // Standard drag-and-drop for desktop
     dragItem.addEventListener('dragstart', (event) => {
       console.log('Drag started');
-      event.dataTransfer.setData('text', event.target.id); // Store the dragged item's ID
+      event.dataTransfer.setData('text', event.target.id);
     });
 
-    // Allow the drop area to accept the dragged item
     dropArea.addEventListener('dragover', (event) => {
       console.log('Drag over');
-      event.preventDefault();  // This is crucial to allow dropping
+      event.preventDefault();
     });
 
-    // Handle the drop
     dropArea.addEventListener('drop', (event) => {
       console.log('Item dropped');
-      event.preventDefault(); // Prevent the default action (navigation)
-
-      // Get the dragged item using the ID
+      event.preventDefault();
       const draggedItemId = event.dataTransfer.getData('text');
       const draggedItem = document.getElementById(draggedItemId);
-
-      // You can either append the dragged item to the drop area (or handle it however you like)
-      // dropArea.appendChild(draggedItem);  // This line is not necessary unless you want to move the item
-
-      // Now, update Shane's image to a happy version
-      const shaneImage = dropArea.querySelector('img'); // Get Shane's image
-      shaneImage.src = 'https://stardewvalleywiki.com/mediawiki/images/9/92/Shane_Happy.png'; // Change to happy version
+      dropArea.appendChild(draggedItem);
+      updateShaneImage();
     });
+
+    // Function to update Shane's image
+    function updateShaneImage() {
+      const shaneImage = dropArea.querySelector('img');
+      shaneImage.src = 'https://stardewvalleywiki.com/mediawiki/images/9/92/Shane_Happy.png';
+    }
   </script>
 </body>
 </html>
