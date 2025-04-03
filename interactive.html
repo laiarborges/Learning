@@ -46,34 +46,39 @@
     <img src="https://stardewvalleywiki.com/mediawiki/images/8/8b/Shane.png" alt="Shane">
   </div>
 
-  <script>
+<script>
     const dragItem = document.getElementById('dragItem');
     const dropArea = document.getElementById('Shane');
 
     // When dragging starts
     dragItem.addEventListener('dragstart', (event) => {
-      event.dataTransfer.setData('text', event.target.id);
+      event.dataTransfer.setData('text', event.target.id); // Store the dragged item's ID
     });
 
-    // Allow the drop area to accept the dragged item
+    // Allow the drop area to accept the dragged item (this is necessary!)
     dropArea.addEventListener('dragover', (event) => {
-      event.preventDefault();  // Necessary to allow the drop
+      event.preventDefault();  // This is crucial to allow dropping
     });
 
     // Handle the drop
     dropArea.addEventListener('drop', (event) => {
-      event.preventDefault();
+      event.preventDefault(); // Prevent the default action (navigation)
 
+      // Get the dragged item using the ID
       const draggedItemId = event.dataTransfer.getData('text');
       const draggedItem = document.getElementById(draggedItemId);
 
       // Move the dragged item to the drop area
       dropArea.appendChild(draggedItem);
 
-      // Change Shane's image to the happy version
+      // Change Shane's image to a happy version
       const img = dropArea.querySelector('img');
       img.src = 'https://stardewvalleywiki.com/mediawiki/images/9/92/Shane_Happy.png';
     });
   </script>
+  <div>
+    <p>Back to main page:</p>
+  <button onclick="window.location.href='http://laiarborges.github.io/Learning/';">Back</button>
+  </div>
 </body>
 </html>
